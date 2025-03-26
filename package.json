@@ -1,0 +1,31 @@
+{
+  "name": "password-management",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "dist-electron/main.js",
+  "scripts": {
+    "dev": "yarn dev:vue & yarn dev:electron",
+    "dev:vue": "vite",
+    "dev:electron": "yarn transpile:electron && cross-env NODE_ENV=development electron .",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "transpile:electron": "tsc --project src/electron/tsconfig.json",
+    "dist:mac": "yarn transpile:electron && yarn build && electron-builder --mac --arm64",
+    "dist:win": "yarn transpile:electron && yarn build && electron-builder --win --x64",
+    "dist:linux": "yarn transpile:electron && yarn build && electron-builder --linux --x64"
+  },
+  "dependencies": {
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/tsconfig": "^0.7.0",
+    "cross-env": "^7.0.3",
+    "electron": "^35.1.0",
+    "electron-builder": "^25.1.8",
+    "typescript": "~5.7.2",
+    "vite": "^6.2.0",
+    "vue-tsc": "^2.2.4"
+  }
+}
