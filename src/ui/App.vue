@@ -1,9 +1,19 @@
 <script setup lang="ts">
-import Login from "./layout/Login/Login.vue";
+import { useRoute } from 'vue-router';
+import MainLayout from './layout/MainLayout.vue';
+import { computed } from 'vue';
+
+const route = useRoute();
+const useMainLayout = computed(() => {
+  return !route.path.includes('/login');
+});
 </script>
 
 <template>
-  <div class="w-full h-full bg-blue-400">
-    <Login />
-  </div>
+  <MainLayout v-if="useMainLayout">
+    <router-view />
+  </MainLayout>
+
+  <!-- Render without layout for login page -->
+  <router-view v-else />
 </template>
